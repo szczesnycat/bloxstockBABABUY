@@ -1,0 +1,56 @@
+name: Обновление стока
+
+on:
+  schedule:
+    # Каждые 30 минут (в 07 и 37 минут часа, время UTC)
+    - cron: "7,37 * * * *"
+  workflow_dispatch: # кнопка «Run workflow» для ручного запуска
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: stock
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Берём свежий сток
+        id: stock
+        run: python3 update_stock.py
+
+      - name: Сохраняем stock.json в репозиторий
+        if: steps.stock.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stock.json
+          git commit -m "Обновление стока"
+          git push
+
+      # Публикуем сайт, если сток изменился или запуск был не по расписанию
+      - name: Собираем сайт
+        if: steps.stock.outputs.changed == 'true' || github.event_name != 'schedule'
+        run: |
+          mkdir _site
+          cp index.html stock.json _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.stock.outputs.changed == 'true' || github.event_name != 'schedule'
+        with:
+          path: _site
+
+      - uses: actions/deploy-pages@v4
+        id: deploy
+        if: steps.stock.outputs.changed == 'true' || github.event_name != 'schedule'
