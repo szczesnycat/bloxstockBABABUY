@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сток Blox Fruits: обычный и Мираж</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style id="css">
+:root{--bg:#eaf3f8;--panel:#ffffff;--ink:#0d2236;--soft:#4d6378;--line:#cfdde8;--sea:#0f6fa8;--mirage:#7b3fd1;--gold:#e8a317;--warn:#c4442f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#081521;--panel:#0f2233;--ink:#e6f0f7;--soft:#9cb2c4;--line:#1f3a52;--sea:#3fa9e8;--mirage:#a97cf0;--gold:#f2b84a;--warn:#ff7a66}}
+:root[data-theme="dark"]{--bg:#081521;--panel:#0f2233;--ink:#e6f0f7;--soft:#9cb2c4;--line:#1f3a52;--sea:#3fa9e8;--mirage:#a97cf0;--gold:#f2b84a;--warn:#ff7a66}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:32px 18px 64px}
+h1,h2,.timer b{font-family:"Russo One","Rubik",system-ui,sans-serif;font-weight:400}
+h1{font-size:clamp(28px,5.5vw,46px);line-height:1.1;margin:0}
+.sub{color:var(--soft);margin:10px 0 0;max-width:60ch}
+.timers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.timer{border-radius:18px;padding:18px 20px;color:#fff}
+.timer.normal{background:var(--sea)} .timer.mirage{background:var(--mirage)}
+.timer span{display:block;font-size:15px;opacity:.9}
+.timer b{display:block;font-size:clamp(34px,8vw,56px);line-height:1.05;font-variant-numeric:tabular-nums;margin-top:4px}
+.timer small{opacity:.85;font-size:13px}
+@media (max-width:560px){.timers{grid-template-columns:1fr}}
+section{margin-top:34px}
+h2{font-size:24px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block}
+.meta{color:var(--soft);font-size:14px;margin-bottom:12px}
+.stale{color:var(--warn);font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.fruit{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.fruit .e{font-size:30px;line-height:1}
+.fruit .n{font-weight:700;font-size:17px}
+.fruit .pr{font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums}
+.fruit a{font-size:13px;color:var(--sea);font-weight:500;text-decoration:none}
+.fruit a:hover{text-decoration:underline}
+.empty{background:var(--panel);border:2px dashed var(--line);border-radius:14px;padding:20px;color:var(--soft);text-align:center}
+.shop{margin-top:40px;background:var(--panel);border:2px solid var(--gold);border-radius:18px;padding:20px 22px}
+.shop h2{font-size:22px}
+.btn{display:inline-block;margin-top:10px;background:var(--gold);color:#2a1d00;font-weight:700;border:none;border-radius:12px;padding:12px 18px;text-decoration:none;font-size:16px;cursor:pointer;font-family:inherit}
+.note{font-size:13px;color:var(--soft);margin-top:30px}
+/* editor */
+.editor{display:none;margin-top:40px;background:var(--panel);border:2px solid var(--ink);border-radius:18px;padding:18px}
+.editor.on{display:block}
+.editor h2{font-size:20px}
+.pick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 16px}
+.pick button{font:inherit;font-size:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.pick button[aria-pressed="true"]{border-color:currentColor;font-weight:700}
+.pick.n button[aria-pressed="true"]{background:var(--sea);color:#fff;border-color:var(--sea)}
+.pick.m button[aria-pressed="true"]{background:var(--mirage);color:#fff;border-color:var(--mirage)}
+.editor label{display:block;font-size:14px;color:var(--soft);margin-bottom:12px}
+.editor input{display:block;width:100%;margin-top:4px;font:inherit;padding:9px 10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+#status{margin-left:10px;font-size:14px;color:var(--soft)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Сток Blox Fruits</h1>
+  <p class="sub">Что сейчас продаёт обычный дилер и дилер на острове Мираж, и сколько осталось до обновления.</p>
+
+  <div class="timers">
+    <div class="timer normal"><span>Обычный сток обновится через</span><b id="t-normal">--:--:--</b><small>Каждые 4 часа</small></div>
+    <div class="timer mirage"><span>Мираж-сток обновится через</span><b id="t-mirage">--:--:--</b><small>Каждые 2 часа</small></div>
+  </div>
+
+  <section>
+    <h2><span class="dot" style="background:var(--sea)"></span>Обычный сток</h2>
+    <div class="meta" id="meta-normal"></div>
+    <div class="grid" id="g-normal"></div>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--mirage)"></span>Мираж-сток</h2>
+    <div class="meta" id="meta-mirage"></div>
+    <div class="grid" id="g-mirage"></div>
+  </section>
+
+  <div class="shop">
+    <h2>🎁 Нужен перманентный фрукт?</h2>
+    <p style="margin:6px 0 0">Не ждите сток: перм фрукты и геймпассы подарком в игре, без пароля, только по нику в Roblox.</p>
+    <a class="btn" id="shop-link" href="#" target="_blank" rel="noopener">Открыть магазин на FunPay</a>
+  </div>
+
+
+  <p class="note">Время обновления считается по UTC и может отличаться на пару минут. Точный момент всегда видно в игре. Данные о стоке: FruityBlox.com. Сайт не связан с разработчиками Blox Fruits.</p>
+</main>
+
+<script type="application/json" id="state">{"link": "https://funpay.com/users/13621606/", "normal": ["Rocket", "Spin", "Mammoth"], "normalAt": 1791551256995, "mirage": ["Rocket", "Spin", "Blade", "Spring", "Flame", "Rubber", "Dough"], "mirageAt": 1791551256995}</script>
+<script id="app">
+const FRUITS=[["Rocket","🚀"],["Spin","🌪️"],["Blade","⚔️"],["Spring","🪀"],["Bomb","💣"],["Smoke","🌫️"],["Spike","🌵"],["Flame","🔥"],["Ice","🧊"],["Sand","🏜️"],["Dark","🌚"],["Eagle","🦅"],["Diamond","💎"],["Light","💡"],["Rubber","🎈"],["Ghost","👻"],["Magma","🌋"],["Quake","💥"],["Buddha","🧘"],["Love","❤️"],["Creation","🛠️"],["Spider","🕷️"],["Sound","🎵"],["Phoenix","🐦"],["Portal","🌀"],["Lightning","🌩️"],["Pain","💢"],["Blizzard","🌨️"],["Gravity","🪐"],["Mammoth","🦣"],["T-Rex","🦖"],["Dough","🍩"],["Shadow","🌑"],["Venom","🐍"],["Gas","💨"],["Spirit","✨"],["Tiger","🐯"],["Yeti","🏔️"],["Kitsune","🦊"],["Control","🎮"],["Dragon","🐉"],["Magnet","🧲"]];
+const EMO=Object.fromEntries(FRUITS);
+const PRICES={Rocket:[5000,50],Spin:[7500,75],Blade:[30000,100],Spring:[60000,180],Smoke:[100000,250],Spike:[180000,380],Flame:[250000,550],Ice:[350000,750],Dark:[500000,950],Light:[650000,1100],Rubber:[750000,1200],Buddha:[1200000,1650],Spider:[1500000,1800],Mammoth:[2700000,2350],Dough:[2800000,2400],Shadow:[2900000,2425]};
+const num=n=>n.toLocaleString("ru-RU");
+let S;try{S=JSON.parse(document.getElementById("state").textContent)}catch(e){S={link:"",normal:[],normalAt:0,mirage:[],mirageAt:0}}
+const $=id=>document.getElementById(id);
+const H=3600e3;
+function nextReset(hours){const p=hours*H;return Math.floor(Date.now()/p)*p+p}
+function lastReset(hours){const p=hours*H;return Math.floor(Date.now()/p)*p}
+function fmt(ms){ms=Math.max(0,ms);const s=Math.floor(ms/1e3),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return [h,m,x].map(v=>String(v).padStart(2,"0")).join(":")}
+function ago(t){const m=Math.round((Date.now()-t)/6e4);if(m<1)return"только что";if(m<60)return m+" мин назад";const h=Math.floor(m/60);return h+" ч "+(m%60)+" мин назад"}
+function safeLink(u){return /^https:\/\/funpay\.com\//.test(u||"")?u:"https://funpay.com/"}
+function tick(){$("t-normal").textContent=fmt(nextReset(4)-Date.now());$("t-mirage").textContent=fmt(nextReset(2)-Date.now())}
+function renderList(kind,hours){
+  const g=$("g-"+kind),meta=$("meta-"+kind),list=S[kind]||[],at=S[kind+"At"]||0;g.innerHTML="";
+  if(!list.length||!at){meta.textContent="";const d=document.createElement("div");d.className="empty";d.style.gridColumn="1/-1";d.textContent="Сток скоро появится. Загляните чуть позже.";g.append(d);return}
+  meta.textContent="Обновлено "+ago(at);
+  if(at<lastReset(hours)){const w=document.createElement("span");w.className="stale";w.textContent=" · сток уже сменился, обновим в ближайшее время";meta.append(w)}
+  list.forEach(n=>{const c=document.createElement("div");c.className="fruit";
+    const e=document.createElement("span");e.className="e";e.textContent=EMO[n]||"🍎";
+    const t=document.createElement("span");t.className="n";t.textContent=n;
+    const pr=document.createElement("span");pr.className="pr";if(PRICES[n])pr.textContent=num(PRICES[n][0])+" Beli · "+num(PRICES[n][1])+" R$";
+    const a=document.createElement("a");a.href=safeLink(S.link);a.target="_blank";a.rel="noopener";a.textContent="Перм подарком →";
+    c.append(e,t,pr,a);g.append(c)});
+}
+function render(){$("shop-link").href=safeLink(S.link);renderList("normal",4);renderList("mirage",2)}
+tick();render();setInterval(tick,1000);setInterval(render,60000);
+
+// Загрузка свежего стока из stock.json (лежит рядом с index.html)
+fetch("stock.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{if(d){S=d;render()}}).catch(()=>{});
+</script>
+</body>
+</html>
