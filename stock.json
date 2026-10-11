@@ -3,21 +3,20 @@
   "normal": [
     "Rocket",
     "Spin",
-    "Spike",
-    "Light",
-    "Love"
+    "Blade",
+    "Flame",
+    "Sand"
   ],
-  "normalAt": 1791734194540,
+  "normalAt": 1791749520899,
   "mirage": [
     "Rocket",
     "Spin",
-    "Blade",
     "Spring",
     "Bomb",
-    "Ice",
-    "Dark",
-    "Eagle",
-    "Diamond"
+    "Smoke",
+    "Spike",
+    "Diamond",
+    "Rubber"
   ],
-  "mirageAt": 1791734194540
+  "mirageAt": 1791749520899
 }
