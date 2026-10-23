@@ -13,14 +13,11 @@
   "mirage": [
     "Rocket",
     "Spin",
-    "Blade",
-    "Spring",
-    "Spike",
+    "Bomb",
+    "Smoke",
     "Flame",
-    "Ice",
     "Sand",
-    "Dark",
-    "Rubber"
+    "Dark"
   ],
-  "mirageAt": 1792790416629
+  "mirageAt": 1792799884982
 }
