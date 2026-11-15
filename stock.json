@@ -3,19 +3,22 @@
   "normal": [
     "Rocket",
     "Spin",
-    "Blade",
     "Spring",
-    "Flame"
+    "Sand",
+    "Magma",
+    "Mammoth",
+    "Yeti"
   ],
-  "normalAt": 1794705426476,
+  "normalAt": 1794731062972,
   "mirage": [
     "Rocket",
     "Spin",
-    "Blade",
-    "Bomb",
-    "Diamond",
-    "Ghost",
-    "Creation"
+    "Spring",
+    "Smoke",
+    "Flame",
+    "Eagle",
+    "Light",
+    "Buddha"
   ],
-  "mirageAt": 1794705426476
+  "mirageAt": 1794731062972
 }
